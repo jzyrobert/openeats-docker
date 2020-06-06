@@ -1,14 +1,9 @@
-FROM nginx:stable-alpine
-
-ENV NODE_VERSION 12.17.0
+FROM nginx:alpine
 
 RUN addgroup -g 1000 node \
-    && adduser -u 1000 -G node -s /bin/sh -D node \
-    && apk add --update nodejs
+    && adduser -u 1000 -G node -s /bin/sh -D node
 
-ENV YARN_VERSION 1.22.4
-
-RUN apk add --update yarn
+RUN apk update && apk add nodejs yarn
 
 ENV OPENEATS_VERSION=master \
     PATH=/usr/local/bin:$PATH \
@@ -62,7 +57,7 @@ RUN apk add --update-cache --update --virtual builddeps \
     ln -s /usr/bin/python3 /usr/local/bin/python && \
     chmod 755 /startup /code/base/prod-entrypoint.sh && \
     pip3 install -r /code/base/requirements.txt && \
-    cd /openeats-web && yarn install --pure-lockfile --production=true && yarn start && \
+    cd /openeats-web && yarn install --pure-lockfile --production=false && yarn start && \
     cp -r build/ /var/www/html/openeats-static/public-ui && \
     apk del builddeps && \
     chmod -R 755 /startup
