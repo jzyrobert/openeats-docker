@@ -26,7 +26,7 @@ ENV OPENEATS_VERSION=master \
     HTTP_X_FORWARDED_PROTO=true \
     # Node config
     NODE_ENV=production \
-    NODE_URL=localhost:8080 \
+    NODE_URL=http://localhost:8080 \
     NODE_LOCALE=en \
     APP_VERSION=0.2
 
@@ -58,7 +58,7 @@ RUN apk add --update-cache --update --virtual builddeps \
     chmod 755 /startup /code/base/prod-entrypoint.sh && \
     pip3 install -r /code/base/requirements.txt && \
     cd /openeats-web && yarn install --pure-lockfile --production=false && yarn start && \
-    cp -r build/ /var/www/html/openeats-static/public-ui && \
+    ln -s /openeats-web/build /var/www/html/openeats-static/public-ui && \
     apk del builddeps && \
     chmod -R 755 /startup
 
