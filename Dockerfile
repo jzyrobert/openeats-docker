@@ -28,7 +28,7 @@ ENV OPENEATS_VERSION=master \
     NODE_ENV=production \
     NODE_URL=localhost:8080 \
     NODE_LOCALE=en \
-    APP_VERSION=0.1
+    APP_VERSION=0.2
 
 COPY default.conf /etc/nginx/conf.d/default.conf
 COPY start.sh /startup/
