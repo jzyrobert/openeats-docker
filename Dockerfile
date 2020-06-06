@@ -33,7 +33,7 @@ ENV OPENEATS_VERSION=master \
     NODE_ENV=production \
     NODE_URL=localhost:8080 \
     NODE_LOCALE=en \
-    APP_VERSION=0
+    APP_VERSION=0.1
 
 COPY default.conf /etc/nginx/conf.d/default.conf
 COPY start.sh /startup/
@@ -62,7 +62,7 @@ RUN apk add --update-cache --update --virtual builddeps \
     ln -s /usr/bin/python3 /usr/local/bin/python && \
     chmod 755 /startup /code/base/prod-entrypoint.sh && \
     pip3 install -r /code/base/requirements.txt && \
-    cd /openeats-web && yarn install --pure-lockfile --production=false && yarn start && \
+    cd /openeats-web && yarn install --pure-lockfile --production=true && yarn start && \
     cp -r build/ /var/www/html/openeats-static/public-ui && \
     apk del builddeps && \
     chmod -R 755 /startup
