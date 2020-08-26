@@ -45,6 +45,7 @@ RUN apk add --update-cache --update --virtual builddeps \
         musl-dev && \
     apk add --update-cache --update \
         mariadb-dev \
+        py3-pip \
         python3 && \
     cd /tmp && \
     wget -O openeats-web.tar.gz "https://github.com/jzyrobert/openeats-web/archive/$OPENEATS_VERSION.tar.gz" && \
